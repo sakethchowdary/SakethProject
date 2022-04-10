@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border = 1>
+    {% for dataitem in data %}
+        {% for key, value in dataitem.items() %}
+            <tr>
+            <th> {{ key }} </th>
+            <td> {{ value }} </td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+ </table>
+{% endblock %}
