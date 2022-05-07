@@ -1,4 +1,4 @@
 Terraform/.terraform
 .DS_Store
 Project/__pycache__
-Project/__pycache__/*
+Project/__pycache__/main.cpython-37.pyc
