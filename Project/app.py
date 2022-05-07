@@ -14,10 +14,10 @@ def performOperation1():
         history = int(request.args.get("history"))
         shots = int(request.args.get("shots"))
         x, y =operation1(history, shots)
-        return jsonify([x, y], history, shots)
+        return (jsonify([x, y]), history, shots)
     else:
         x, y = operation1(100, 10000)
-        return jsonify([x, y], 100, 10000)
+        return (jsonify([x, y], 100, 10000), 100, 10000)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=3000)

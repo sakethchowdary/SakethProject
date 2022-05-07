@@ -21,7 +21,8 @@ def defGraph():
             url = url,
             headers=headers
         )
-        data = response.json()[0]
+        data = response.json()
+        print(data)
         labels = [list(key.keys())[0] for key in data]
         # print(labels)
         v1 = [datum.get(list(datum.keys())[0]) for datum in data]
