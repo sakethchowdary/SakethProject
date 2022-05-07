@@ -1,2 +1,3 @@
 Terraform/.terraform
 .DS_Store
+Project/__pycache__

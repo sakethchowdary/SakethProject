@@ -57,8 +57,8 @@ resource "aws_instance" "backendlogic-ec2" {
         "echo 'Building docker image'",
         "sudo docker build -t backend-logic-repo:latest .",
         "sudo docker tag backend-logic-repo:latest 409043763943.dkr.ecr.us-east-1.amazonaws.com/backend-logic-repo:latest"
-        # "sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 409043763943.dkr.ecr.us-east-1.amazonaws.com",
-        # "sudo docker push 409043763943.dkr.ecr.us-east-1.amazonaws.com/backend-logic-repo:latest"
+        # "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 409043763943.dkr.ecr.us-east-1.amazonaws.com",
+        # "docker push 409043763943.dkr.ecr.us-east-1.amazonaws.com/backend-logic-repo:latest"
     ]
   }
 

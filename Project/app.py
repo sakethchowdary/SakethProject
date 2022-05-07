@@ -20,4 +20,4 @@ def performOperation1():
         return (jsonify([x, y], 100, 10000), str(100), str(10000))
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=3002)
+    app.run(debug=True, host="0.0.0.0", port=3000)
