@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div><center>
+    
+    <p style="padding-top:10px;">Trying new graph functionality</p>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <canvas id="lineChart" width="900" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById("lineChart").getContext("2d")
+        var lc = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: {{ labels | safe }},
+                datasets: [
+                    {
+                        label: "Data Point 1",
+                        data: {{ values[0] | safe }},
+                        fill: false,
+                        borderColor: "#FF8000",
+                        lineTension: 0.4
+                    },
+                    {
+                        label: "Data Point 2",
+                        data: {{ values[1] | safe }},
+                        fill: false,
+                        borderColor: "rgb(75, 192, 193)",
+                        lineTension: 0.4
+                    },
+                    {
+                        label: "Data Point 3",
+                        data: {{ values[2] | safe }},
+                        fill: false,
+                        borderColor: "#CCCCFF",
+                        lineTension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: false
+            }
+        });
+    </script>
+</center></div>
+
+{% endblock %}

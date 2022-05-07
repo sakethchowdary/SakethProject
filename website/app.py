@@ -9,6 +9,28 @@ app = Flask(__name__)
 def HelloWorld():
     return "Hello World!"
 
+@app.route("/default", methods=["GET"])
+def defGraph():
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+        }
+    url = "http://EC2Co-EcsEl-10BCU9C7X6FZN-1450603549.us-east-1.elb.amazonaws.com:3000/getdata"
+    print(url)
+    try:
+        response = requests.get(
+            url = url,
+            headers=headers
+        )
+        data = response.json()[0]
+        labels = [list(key.keys())[0] for key in data]
+        # print(labels)
+        v1 = [datum.get(list(datum.keys())[0]) for datum in data]
+        values = [[row[1] for row in v1], [row[2] for row in v1], [row[3] for row in v1]]
+        # print(values)
+        return render_template("defaultGraph.html", data=data[0], labels=labels, values=values)
+    except Exception as e:
+        return render_template("error.html", message="Error calling ECS API. please check tasks in AWS.")
+
 @app.route("/", methods=["GET"])
 def printData():
     headers = {
