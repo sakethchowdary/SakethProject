@@ -1,10 +1,13 @@
 import json
 import boto3
+from os import environ
 
-def stopTasks():
-    clusterName = "backend-logic-fargate-cluster"
+def stopTasks(ID, KEY):
+    clusterName = environ.get("CLUSTER")
     client = boto3.client(
-        "ecs"
+        "ecs",
+        aws_access_key_id = ID,
+        aws_secret_access_key = KEY
     )
     response = client.list_tasks(cluster=clusterName)
     tasks = response["taskArns"]
@@ -14,14 +17,14 @@ def stopTasks():
             task=task,
             reason='Desired count changed'
         )
-    changeCount(0)
+    changeCount(0, ID, KEY)
 
-def changeCount(desiredCount):
-    clusterName = "backend-logic-fargate-cluster"
+def changeCount(desiredCount, ID, KEY):
+    clusterName = environ.get("CLUSTER")
     client = boto3.client(
         "ecs",
-        aws_access_key_id = "AKIAV6PHIQLTWMQBJNTQ",
-        aws_secret_access_key = "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"
+        aws_access_key_id = ID,
+        aws_secret_access_key = KEY
     )
     print("client created")
     # List all running services
@@ -41,9 +44,12 @@ def changeCount(desiredCount):
     
 
 def lambda_handler(event, context):
-    print(event)
+    # Gather data from env
+    ID = environ.get("ID")
+    print(ID)
+    KEY = environ.get("KEY")
     if event["operation"] == "updateCount":
         print("Updating count of tasks")
-        changeCount(event["count"])
+        changeCount(event["count"], ID, KEY)
     elif event["operation"] == "stopTasks":
-        stopTasks()
+        stopTasks(ID, KEY)
